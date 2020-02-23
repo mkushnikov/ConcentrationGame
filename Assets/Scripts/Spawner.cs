@@ -37,7 +37,6 @@ public class Spawner : MonoBehaviour
         }
 
     }
-
     private void ShuffleCards(List<GameObject> cards)
     {
         int count = cards.Count;

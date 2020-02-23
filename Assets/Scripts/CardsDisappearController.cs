@@ -5,6 +5,7 @@ using UnityEngine;
 public class CardsDisappearController : MonoBehaviour
 {
     [SerializeField] private float _disapperCountdown;
+    [SerializeField] private int _pairScore;
 
     private bool _isDisappearCoroutineRunning = false;
 
@@ -30,7 +31,8 @@ public class CardsDisappearController : MonoBehaviour
         }
 
         GetComponent<OpenedCardsCollector>().ClearOpenedCardsInfo();
-        GetComponent<Deck>().PairsCount--;
+        GetComponent<Deck>().UpdatePairsCount(-1);
+        GetComponent<Deck>().UpdateGameScore(_pairScore);
         _isDisappearCoroutineRunning = false;
         GetComponent<Deck>().SetBlockerState(false);
     }

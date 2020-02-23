@@ -14,7 +14,6 @@ public class Card : MonoBehaviour, IPointerClickHandler
     {
         _frontSide.GetComponent<Image>().color = color;
     }
-
     public void OnPointerClick(PointerEventData eventData)
     {
         if (!IsTurned)
@@ -22,7 +21,6 @@ public class Card : MonoBehaviour, IPointerClickHandler
             Open();
         }
     }
-
     public void Open()
     {
         GetComponentInParent<OpenedCardsCollector>().OnCardOpen(transform);

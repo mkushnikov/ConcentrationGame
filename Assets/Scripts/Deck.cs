@@ -7,13 +7,16 @@ public class Deck : MonoBehaviour
     [SerializeField] private GameObject _cardPrefab;
     [SerializeField] private int _deckSize;
 
-    public int PairsCount { get; set; }
+    [SerializeField] private GameObject _ui;
 
+    public int PairsCount { get; set; }
+    public int GameScore { get; set; }
 
     private void Awake()
     {
         GetComponent<Spawner>().SpawnCards(_cardPrefab, _deckSize);
-        PairsCount = _deckSize / 2;
+        UpdatePairsCount(_deckSize / 2);
+        UpdateGameScore(0);
     }
 
     private void Start()
@@ -44,6 +47,20 @@ public class Deck : MonoBehaviour
         yield return new WaitForEndOfFrame();
 
         GetComponent<GridLayoutGroup>().enabled = false;
+    }
+
+    public void UpdatePairsCount(int value)
+    {
+        PairsCount += value;
+
+        _ui.GetComponent<UI>().PairsLabel = PairsCount.ToString();
+    }
+
+    public void UpdateGameScore(int value)
+    {
+        GameScore += value;
+
+        _ui.GetComponent<UI>().ScoreLabel = GameScore.ToString();
     }
 }
 
