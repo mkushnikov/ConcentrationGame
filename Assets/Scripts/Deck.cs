@@ -2,6 +2,8 @@
 using UnityEngine;
 using UnityEngine.UI;
 
+[RequireComponent(typeof(OpenedCardsCollector))]
+[RequireComponent(typeof(OpenedCardsHandler))]
 public class Deck : MonoBehaviour
 {
     [SerializeField] private GameObject _cardPrefab;
@@ -37,17 +39,18 @@ public class Deck : MonoBehaviour
         }
     }
 
-    public void SetBlockerState(bool state)
-    {
-        GetComponent<CanvasGroup>().blocksRaycasts = !state;
-    }
-
-    IEnumerator DisableGridLayout()
+    private IEnumerator DisableGridLayout()
     {
         yield return new WaitForEndOfFrame();
 
         GetComponent<GridLayoutGroup>().enabled = false;
     }
+
+    public void SetBlockerState(bool state)
+    {
+        GetComponent<CanvasGroup>().blocksRaycasts = !state;
+    }
+
 
     public void UpdatePairsCount(int value)
     {

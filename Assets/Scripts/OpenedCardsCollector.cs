@@ -4,31 +4,26 @@ using UnityEngine;
 public class OpenedCardsCollector : MonoBehaviour
 {
     private List<Transform> _openedCards = new List<Transform>();
-    private int OpenedCardsCount = 0;
 
-    public void OnCardOpen(Transform card)
+    public void AddCard(Transform card)
     {
         _openedCards.Add(card);
-        OpenedCardsCount++;
 
-        if (OpenedCardsCount == 2)
+        if (_openedCards.Count == 2)
         {
-            Transform[] cardsArray = _openedCards.ToArray();
-
-            if (cardsArray[0].GetComponent<Card>().getFaceSlotvalue() == cardsArray[1].GetComponent<Card>().getFaceSlotvalue())
-            {
-                GetComponent<CardsDisappearController>().initCardsDisappering(_openedCards);
-            }
-            else
-            {
-                GetComponent<CardsClosingController>().initCardsClosing(_openedCards);
-            }
+            GetComponent<OpenedCardsHandler>().InitCardsHandling(_openedCards, isPairFound(_openedCards));
         }
     }
 
-    public void ClearOpenedCardsInfo()
+    private bool isPairFound(List<Transform> openedCards)
+    {
+        Transform[] cardsArray = openedCards.ToArray();
+
+        return cardsArray[0].GetComponent<Card>().GetFaceSlotValue() == cardsArray[1].GetComponent<Card>().GetFaceSlotValue();
+    }
+
+    public void ClearCardsInfo()
     {
         _openedCards.Clear();
-        OpenedCardsCount = 0;
     }
 }

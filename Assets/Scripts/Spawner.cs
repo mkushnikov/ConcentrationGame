@@ -11,7 +11,7 @@ public class Spawner : MonoBehaviour
         }
 
         List<GameObject> cards = new List<GameObject>();
-        Color faceColor = getNewColor();
+        Color faceColor = GetNewColor();
 
         while (count > 0)
         {
@@ -19,7 +19,7 @@ public class Spawner : MonoBehaviour
 
             if (count % 2 == 0)
             {
-                faceColor = getNewColor();
+                faceColor = GetNewColor();
             }
 
             card.GetComponent<Card>().setFace(faceColor);
@@ -50,7 +50,7 @@ public class Spawner : MonoBehaviour
             cards[pos] = temp;
         }
     }
-    private Color getNewColor()
+    private Color GetNewColor()
     {
         return new Color
         {
