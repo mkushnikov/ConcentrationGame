@@ -35,7 +35,6 @@ public class Spawner : MonoBehaviour
         {
             card.transform.SetParent(transform, false);
         }
-
     }
     private void ShuffleCards(List<GameObject> cards)
     {

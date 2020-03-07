@@ -16,9 +16,7 @@ public class Deck : MonoBehaviour
 
     private void Awake()
     {
-        GetComponent<Spawner>().SpawnCards(_cardPrefab, _deckSize);
-        UpdatePairsCount(_deckSize / 2);
-        UpdateGameScore(0);
+        GameInit();
     }
 
     private void Start()
@@ -31,12 +29,19 @@ public class Deck : MonoBehaviour
         if (PairsCount == 0)
         {
 #if UNITY_EDITOR
-            UnityEditor.EditorApplication.isPlaying = false;
+            _ui.GetComponent<UI>().SetWinScreenState(true);
             Debug.Log("All pairs found!!!");
 #else
             Application.Quit();
 #endif
         }
+    }
+
+    public void GameInit()
+    {
+        GetComponent<Spawner>().SpawnCards(_cardPrefab, _deckSize);
+        UpdatePairsCount(_deckSize / 2);
+        UpdateGameScore(0);
     }
 
     private IEnumerator DisableGridLayout()
@@ -50,7 +55,6 @@ public class Deck : MonoBehaviour
     {
         GetComponent<CanvasGroup>().blocksRaycasts = !state;
     }
-
 
     public void UpdatePairsCount(int value)
     {
